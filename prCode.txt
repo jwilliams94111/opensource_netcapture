@@ -1,0 +1,38 @@
+import github
+
+def create_pull_request(repo, title, body, head, base):
+  """Creates a pull request in the given GitHub repository.
+
+  Args:
+    repo: The GitHub repository object.
+    title: The title of the pull request.
+    body: The body of the pull request.
+    head: The name of the branch that contains the changes to be merged.
+    base: The name of the branch into which the changes should be merged.
+
+  Returns:
+    The created pull request object.
+  """
+
+  pr = repo.create_pull(
+      title=title,
+      body=body,
+      head=head,
+      base=base)
+
+  return pr
+
+if __name__ == "__main__":
+  # Get the GitHub repository object.
+  repo = github.Repository("user", "repo")
+
+  # Create a pull request with the given title, body, head, and base.
+  pr = create_pull_request(
+      repo=repo,
+      title="My first pull request",
+      body="This is my first pull request.",
+      head="my-branch",
+      base="master")
+
+  # Print the pull request URL.
+  print(pr.url)
